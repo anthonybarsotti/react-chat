@@ -5,15 +5,16 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = function(config = {
-  plugins: [],
-  devtool: 'source-map',
+module.exports = function({
+  plugins,
+  devtool,
 }) {
   return {
     entry: path.join(process.cwd(), 'client', 'scripts', 'app.js'),
     output: {
       path: path.join(process.cwd(), 'build'),
       filename: 'app.js',
+      publicPath: '/',
     },
     module: {
       rules: [
@@ -52,7 +53,7 @@ module.exports = function(config = {
       ],
     },
     target: 'web',
-    plugins: config.plugins.concat([
+    plugins: plugins.concat([
       new HtmlWebpackPlugin({
         template: path.join(process.cwd(), 'client', 'index.html'),
         minify: {
@@ -67,6 +68,6 @@ module.exports = function(config = {
       }),
       new ExtractTextPlugin('[name].css'),
     ]),
-    devtool: config.devtool,
+    devtool,
   };
 };

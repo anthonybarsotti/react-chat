@@ -18,11 +18,37 @@ const wss = new WebSocket.Server({
 const PROD = process.env.NODE_ENV === 'production';
 const PORT = process.env.PORT || 8080;
 
-app.use(helmet());
+// Apply middlewares
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'client', 'index.html'))
-});
+app.use(helmet());
+if (PROD) {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'index.html'));
+  });
+} else {
+  const webpack = require('webpack');
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const config = require('../config/webpack.dev.js');
+  const compiler = webpack(config);
+
+  app.use(webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    silent: true,
+    stats: 'errors-only',
+    noInfo: true,
+  }));
+
+  app.use('*', (req, res, next) => {
+    const filename = path.join(compiler.outputPath,'index.html');
+
+    compiler.outputFileSystem.readFile(filename, (err, result) => {
+      if (err) return next(err);
+      res.set('content-type','text/html');
+      res.send(result);
+      res.end();
+    });
+  });
+}
 
 wss.on('connection', (ws, req) => {
   console.log('user connected');
