@@ -1,0 +1,25 @@
+{
+  "name": "react-chat",
+  "version": "0.0.1",
+  "description": "A chat application using React and Redux",
+  "scripts": {
+    "build": "webpack --config ./webpack/webpack.server.js",
+    "watch": "NODE_ENV=development node ./server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthonybarsotti/react-chat.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "chat"
+  ],
+  "author": "Anthony Barsotti",
+  "dependencies": {
+    "express": "^4.15.3",
+    "helmet": "^3.6.1",
+    "webpack": "^2.6.1",
+    "ws": "^3.0.0"
+  }
+}
