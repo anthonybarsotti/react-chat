@@ -2,7 +2,6 @@
 // Dependencies
 
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = function({
@@ -54,18 +53,6 @@ module.exports = function({
     },
     target: 'web',
     plugins: plugins.concat([
-      new HtmlWebpackPlugin({
-        template: path.join(process.cwd(), 'client', 'index.html'),
-        minify: {
-          removeComments: true,
-          collapseWhitespace: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeStyleLinkTypeAttributes: true,
-          keepClosingSlash: false,
-        },
-      }),
       new ExtractTextPlugin('[name].css'),
     ]),
     devtool,

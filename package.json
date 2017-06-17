@@ -3,8 +3,10 @@
   "version": "0.0.1",
   "description": "A chat application using React and Redux",
   "scripts": {
-    "prebuild": "rm -rf ./build",
-    "build": "webpack --config ./config/webpack.base.js",
+    "prebuild:dev": "rm -rf ./build",
+    "build:dev": "webpack --config ./config/webpack.dev.js",
+    "prebuild:prod": "rm -rf ./build",
+    "build:prod": "webpack --config ./config/webpack.prod.js",
     "watch": "NODE_ENV=development node ./server"
   },
   "repository": {
@@ -38,6 +40,7 @@
     "postcss-cssnext": "^2.11.0",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.6",
-    "style-loader": "^0.18.2"
+    "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "^0.4.3"
   }
 }
