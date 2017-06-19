@@ -50,6 +50,11 @@ module.exports = function({
       modules: [
         'node_modules',
       ],
+      extensions: [
+        '.js',
+        '.jsx',
+        '.css',
+      ],
     },
     target: 'web',
     plugins: plugins.concat([
