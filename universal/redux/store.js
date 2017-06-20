@@ -15,7 +15,7 @@ import logger from 'redux-logger';
 
 // Modules
 
-import login from './modules/login';
+import account from './modules/account';
 
 // Constants
 
@@ -26,7 +26,7 @@ middlewares.push(routerMiddleware(history));
 if (process.env.NODE_ENV !== 'production') middlewares.push(logger);
 
 const rootReducer = combineReducers({
-  login,
+  account,
   router: routerReducer,
 });
 
