@@ -7,6 +7,9 @@ import {
 import {
   withRouter,
 } from 'react-router-dom';
+
+// Actions
+
 import {
   handleUserNameChange,
   handleColorChange,
@@ -19,10 +22,24 @@ import Login from '../components/Login';
 
 function mapStateToProps({
   account,
+  socket,
 }) {
+  const {
+    userName,
+    color,
+  } = account;
+  const {
+    connected,
+    connecting,
+    error,
+  } = socket;
+
   return {
-    userName: account.userName,
-    color: account.color,
+    connectionError: error,
+    connecting,
+    connected,
+    userName,
+    color,
   };
 }
 

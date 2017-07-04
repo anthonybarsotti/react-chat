@@ -7,7 +7,7 @@
     "build:dev": "webpack --config ./config/webpack.dev.js",
     "prebuild:prod": "rm -rf ./build",
     "build:prod": "webpack --config ./config/webpack.prod.js",
-    "watch": "NODE_ENV=development node ./server"
+    "start": "NODE_ENV=development node ./server"
   },
   "repository": {
     "type": "git",

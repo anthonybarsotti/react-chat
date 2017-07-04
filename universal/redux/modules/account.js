@@ -21,9 +21,10 @@ export function handleColorChange(value) {
   };
 };
 
-export function handleFormSubmit(form) {
+export function handleFormSubmit(data) {
   return {
     type: HANDLE_FORM_SUBMIT,
+    data,
   };
 };
 
