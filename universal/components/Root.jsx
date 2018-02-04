@@ -2,18 +2,10 @@
 // Dependencies
 
 import React from 'react';
-import {
-  Provider,
-} from 'react-redux';
-import {
-  ConnectedRouter,
-} from 'react-router-redux';
-import {
-  Route,
-} from 'react-router-dom';
-import store, {
-  history,
-} from '../redux/store';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import { Route } from 'react-router-dom';
+import store, { history } from '../redux/store';
 
 // Components
 
@@ -29,4 +21,4 @@ export default function Root() {
       </ConnectedRouter>
     </Provider>
   );
-};
+}

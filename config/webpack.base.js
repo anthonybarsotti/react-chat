@@ -1,15 +1,13 @@
 
 // Dependencies
-
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = function({
-  plugins,
+module.exports = function generateConfig({
   devtool,
+  plugins,
 }) {
   return {
-    entry: path.join(process.cwd(), 'client', 'scripts', 'app.js'),
+    entry: [path.join(process.cwd(), 'client', 'scripts', 'app.js')],
     output: {
       path: path.join(process.cwd(), 'build'),
       filename: 'app.js',
@@ -21,21 +19,6 @@ module.exports = function({
           test: /\.jsx?$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
-        },
-        {
-          test: /\.css$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  importLoaders: 1,
-                },
-              },
-              'postcss-loader',
-            ],
-          }),
         },
         {
           test: /\.(jpg|png|gif|svg)$/,
@@ -57,9 +40,7 @@ module.exports = function({
       ],
     },
     target: 'web',
-    plugins: plugins.concat([
-      new ExtractTextPlugin('[name].css'),
-    ]),
     devtool,
+    plugins,
   };
 };

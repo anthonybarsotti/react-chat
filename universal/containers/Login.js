@@ -1,37 +1,30 @@
 
 // Dependencies
-
-import {
-  connect,
-} from 'react-redux';
-import {
-  withRouter,
-} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 // Actions
-
 import {
   handleUserNameChange,
   handleColorChange,
-  handleFormSubmit,
+  handleFormSubmit
 } from '../redux/modules/account';
 
 // Components
-
 import Login from '../components/Login';
 
-function mapStateToProps({
+const mapStateToProps = function mapStateToProps({
   account,
-  socket,
+  socket
 }) {
   const {
     userName,
-    color,
+    color
   } = account;
   const {
     connected,
     connecting,
-    error,
+    error
   } = socket;
 
   return {
@@ -39,12 +32,12 @@ function mapStateToProps({
     connecting,
     connected,
     userName,
-    color,
+    color
   };
 }
 
 export default withRouter(connect(mapStateToProps, {
   handleUserNameChange,
   handleColorChange,
-  handleFormSubmit,
+  handleFormSubmit
 })(Login));

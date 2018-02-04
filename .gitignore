@@ -90,3 +90,5 @@ typings/
 ### Build Files ###
 
 build
+
+docker-compose.yml
