@@ -1,6 +1,5 @@
 
 // Constants
-
 export const HANDLE_USERNAME_CHANGE = 'account/HANDLE_USERNAME_CHANGE';
 export const HANDLE_COLOR_CHANGE = 'account/HANDLE_COLOR_CHANGE';
 export const HANDLE_FORM_SUBMIT = 'account/HANDLE_FORM_SUBMIT';
@@ -9,36 +8,34 @@ export const HANDLE_AUTH_ERROR = 'account/HANDLE_AUTH_ERROR';
 export const RECEIVE_TOKEN = 'account/RECEIVE_TOKEN';
 
 // Action Creators
-
 export function handleUsernameChange(value) {
   return {
     type: HANDLE_USERNAME_CHANGE,
     value,
   };
-};
+}
 
 export function handleColorChange(value) {
   return {
     type: HANDLE_COLOR_CHANGE,
     value,
   };
-};
+}
 
 export function handleAuthSuccess() {
   return {
     type: HANDLE_AUTH_SUCCESS,
   };
-};
+}
 
 export function handleAuthError(error) {
   return {
     type: HANDLE_AUTH_ERROR,
     error,
   };
-};
+}
 
 // Reducer
-
 export default function reducer(state = {
   loggedIn: false,
   authError: null,
@@ -74,4 +71,4 @@ export default function reducer(state = {
     default:
       return state;
   }
-};
+}

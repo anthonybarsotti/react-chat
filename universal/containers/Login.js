@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import {
   handleUserNameChange,
   handleColorChange,
-  handleFormSubmit
+  handleFormSubmit,
 } from '../redux/modules/account';
 
 // Components
@@ -15,16 +15,16 @@ import Login from '../components/Login';
 
 const mapStateToProps = function mapStateToProps({
   account,
-  socket
+  socket,
 }) {
   const {
     userName,
-    color
+    color,
   } = account;
   const {
     connected,
     connecting,
-    error
+    error,
   } = socket;
 
   return {
@@ -32,12 +32,12 @@ const mapStateToProps = function mapStateToProps({
     connecting,
     connected,
     userName,
-    color
+    color,
   };
-}
+};
 
 export default withRouter(connect(mapStateToProps, {
   handleUserNameChange,
   handleColorChange,
-  handleFormSubmit
+  handleFormSubmit,
 })(Login));

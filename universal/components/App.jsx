@@ -12,11 +12,6 @@ import {
 import Login from '../containers/Login';
 
 export default class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.connectToSocketServer();
   }
@@ -32,5 +27,4 @@ export default class App extends React.Component {
       </Switch>
     );
   }
-
-};
+}

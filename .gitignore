@@ -87,8 +87,5 @@ typings/
 # dotenv environment variables file
 .env
 
-### Build Files ###
-
+# Build Files
 build
-
-docker-compose.yml

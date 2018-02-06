@@ -1,4 +1,4 @@
-
+/* globals window, WebSocket */
 // Dependencies
 import {
   CONNECT_TO_SOCKET_SERVER,
@@ -8,26 +8,13 @@ import {
   socketError,
 } from '../modules/socket';
 
-export default function socketMiddleware() {
-  var socket = null;
+let socket = null;
 
-  return store => next => action => {
-    switch(action.type) {
-      case CONNECT_TO_SOCKET_SERVER:
-        connectToSocketServer(store, socket);
-      case DISCONNECT_FROM_SOCKET_SERVER:
-        disconnectFromSocketServer(socket);
-      default:
-        return next(action);
-    }
-  };
-};
-
-function connectToSocketServer(store, socket) {
-  socket = new WebSocket(window.location.href.replace(/https?\:\/\//, 'ws://'));
+const connectToSocketServer = function connectToSocketServer(store) {
+  socket = new WebSocket(window.location.href.replace(/https?:\/\//, 'ws://'));
   store.dispatch(socketConnecting());
 
-  socket.addEventListener('open', (event) => {
+  socket.addEventListener('open', () => {
     store.dispatch(socketConnected());
   });
 
@@ -35,12 +22,29 @@ function connectToSocketServer(store, socket) {
     store.dispatch(socketError(event));
   });
 
-  socket.addEventListener('message', (event) => {
+  // socket.addEventListener('message', (event) => {
+  //
+  // });
+};
 
-  });
-}
-
-function disconnectFromSocketServer(socket) {
+const disconnectFromSocketServer = function disconnectFromSocketServer() {
   if (socket !== null) socket.close();
   socket = null;
+};
+
+export default function socketMiddleware() {
+  return store => next => (action) => {
+    switch (action.type) {
+      case CONNECT_TO_SOCKET_SERVER:
+        connectToSocketServer(store, socket);
+        break;
+      case DISCONNECT_FROM_SOCKET_SERVER:
+        disconnectFromSocketServer(socket);
+        break;
+      default:
+        break;
+    }
+
+    return next(action);
+  };
 }

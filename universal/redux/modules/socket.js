@@ -1,6 +1,5 @@
 
 // Constants
-
 export const CONNECT_TO_SOCKET_SERVER = 'socket/CONNECT_TO_SOCKET_SERVER';
 export const DISCONNECT_FROM_SOCKET_SERVER = 'socket/DISCONNECT_FROM_SOCKET_SERVER';
 const SOCKET_CONNECTING = 'socket/SOCKET_CONNECTING';
@@ -8,25 +7,24 @@ const SOCKET_CONNECTED = 'socket/SOCKET_CONNECTED';
 const SOCKET_ERROR = 'socket/SOCKET_ERROR';
 
 // Action Creators
-
 export function connectToSocketServer() {
   return {
     type: CONNECT_TO_SOCKET_SERVER,
   };
-};
+}
 
 export function disconnectFromSocketServer() {
   return {
     type: DISCONNECT_FROM_SOCKET_SERVER,
   };
-};
+}
 
 export function socketConnecting() {
   return {
     type: SOCKET_CONNECTING,
     connecting: true,
   }
-};
+}
 
 export function socketConnected() {
   return {
@@ -34,7 +32,7 @@ export function socketConnected() {
     connected: true,
     connecting: false,
   };
-};
+}
 
 export function socketError(error) {
   return {
@@ -42,7 +40,7 @@ export function socketError(error) {
     connecting: false,
     error,
   };
-};
+}
 
 // Reducer
 
@@ -56,7 +54,7 @@ export default function reducer(state = {
   connected,
   error,
 }) {
-  switch(type) {
+  switch (type) {
     case SOCKET_CONNECTING:
       return {
         ...state,
@@ -73,8 +71,8 @@ export default function reducer(state = {
         ...state,
         connecting,
         error,
-      }
+      };
     default:
       return state;
-  };
-};
+  }
+}

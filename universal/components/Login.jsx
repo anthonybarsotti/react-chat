@@ -1,7 +1,15 @@
 
 // Dependencies
-
 import React from 'react';
+
+const serializeFormData = function serializeFormData(form) {
+  const formData = new FormData(form);
+  const jsonData = {};
+
+  for (const [key, value] of formData.entries) jsonData[key] = value;
+
+  return jsonData;
+};
 
 export default function Login({
   handleUserNameChange,
@@ -12,16 +20,19 @@ export default function Login({
   connected,
 }) {
   const loginForm = (
-    <form noValidate onSubmit={event => {
-      event.preventDefault();
-      handleFormSubmit(serializeFormData(event.target));
-    }}>
+    <form
+      noValidate
+      onSubmit={(event) => {
+        event.preventDefault();
+        handleFormSubmit(serializeFormData(event.target));
+      }}
+    >
       <input
         type="text"
         name="username"
         placeholder="Username"
         value={userName}
-        onChange={event => {
+        onChange={(event) => {
           handleUserNameChange(event.target.value);
         }}
       />
@@ -42,13 +53,4 @@ export default function Login({
       }
     </div>
   );
-};
-
-function serializeFormData(form) {
-  const formData = new FormData(form);
-  const jsonData = {};
-
-  for (const [key, value] of formData.entries) jsonData[key] = value;
-
-  return jsonData;
-};
+}

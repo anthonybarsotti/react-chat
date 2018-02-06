@@ -1,6 +1,5 @@
-
+/* globals window */
 // Dependencies
-
 import {
   HANDLE_AUTH_SUCCESS,
   RECEIVE_TOKEN,
@@ -11,13 +10,13 @@ import {
   sendMessage,
 } from '../modules/socket';
 
-export default function() {
-  return store => next => action => {
-    switch(action.type) {
+export default function () {
+  return store => next => (action) => {
+    switch (action.type) {
       case RECEIVE_TOKEN:
         try {
           window.sessionStorage.setItem('token', action.token);
-        } catch(e) {
+        } catch (e) {
           store.dispatch(handleAuthError(e));
         }
 
@@ -29,7 +28,9 @@ export default function() {
         store.dispatch(sendMessage('newUserNotification'));
         break;
       default:
-        return next(action);
+        break;
     }
+
+    return next(action);
   };
-};
+}

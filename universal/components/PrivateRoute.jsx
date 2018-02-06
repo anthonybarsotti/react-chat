@@ -1,6 +1,5 @@
 
 // Dependencies
-
 import React from 'react';
 import {
   Route,
@@ -10,22 +9,27 @@ import {
 export default function PrivateRoute({
   component: Component,
   loggedIn,
-  ...rest,
+  ...rest
 }) {
   return (
-    <Route {...rest} render={props => (
+    <Route
+      {...rest}
+      render={props => (
       loggedIn
         ? (
-          <Component {...props}/>
+          <Component {...props} />
         )
         : (
-          <Redirect to={{
-            pathname: '/',
-            state: {
-              from: props.location,
-            }
-          }}/>
+          <Redirect
+            to={{
+              pathname: '/',
+              state: {
+                from: props.location,
+              },
+            }}
+          />
         )
-    )}/>
+      )}
+    />
   );
-};
+}

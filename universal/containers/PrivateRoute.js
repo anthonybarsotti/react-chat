@@ -8,6 +8,6 @@ import PrivateRoute from '../components/PrivateRoute';
 
 const mapStateToProps = function mapStateToProps({ account }) {
   return { loggedIn: account.loggedIn };
-}
+};
 
 export default withRouter(connect(mapStateToProps)(PrivateRoute));

@@ -1,6 +1,5 @@
 
 // Dependencies
-
 import {
   createStore,
   combineReducers,
@@ -15,16 +14,14 @@ import createHistory from 'history/createBrowserHistory';
 import socketMiddleware from './middleware/socket';
 
 // Reducers
-
 import account from './modules/account';
 import socket from './modules/socket';
 
 // Constants
-
 export const history = createHistory();
 const middlewares = [
   routerMiddleware(history),
-  socketMiddleware()
+  socketMiddleware(),
 ];
 
 if (process.env.NODE_ENV !== 'production') middlewares.push(logger);
