@@ -6,9 +6,9 @@ import helmet from 'helmet';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import { createServer } from 'http';
-import { join as pathJoin } from 'path';
-import { Server as WebSocketServer } from 'ws';
+import http from 'http';
+import path from 'path';
+import WebSocket from 'ws';
 import pgp from 'pg-promise';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
@@ -26,7 +26,7 @@ dotenv.config();
 
 // Constants
 const app = express();
-const server = createServer(app);
+const server = http.createServer(app);
 const {
   PORT = 8080,
   DB_USER,
@@ -37,7 +37,7 @@ const {
 } = process.env;
 const postgres = pgp();
 const db = postgres(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`);
-const wss = new WebSocketServer({
+const wss = new WebSocket.Server({
   verifyClient: wsAuthMiddleware,
   server,
 });
@@ -67,7 +67,7 @@ app.use('/api', apiRouter(db));
 if (process.env.NODE_ENV === 'production') {
   // Serve the index for all unmatched GET requests
   app.get('*', (req, res) => {
-    res.sendFile(pathJoin(process.cwd(), 'index.html'));
+    res.sendFile(path.join(process.cwd(), 'index.html'));
   });
 } else {
   // Conditionally use webpack dev middleware in development
@@ -82,7 +82,7 @@ if (process.env.NODE_ENV === 'production') {
 
   // When using webpack dev server, serve the index from the middleware's in-memory fs
   app.get('*', (req, res, next) => {
-    const filename = pathJoin(compiler.outputPath, 'index.html');
+    const filename = path.join(compiler.outputPath, 'index.html');
 
     compiler.outputFileSystem.readFile(filename, (err, result) => {
       if (err) {

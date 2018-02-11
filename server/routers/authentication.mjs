@@ -1,6 +1,6 @@
 
 // Dependencies
-import { Router } from 'express';
+import express from 'express';
 import CSRF from 'csrf';
 import jwt from '../utilities/jwt-promise.mjs';
 
@@ -17,7 +17,7 @@ const generateCSRF = function generateCSRF() {
 };
 
 export default function authentication(db) {
-  const router = new Router();
+  const router = new express.Router();
 
   router.post('/', async (req, res) => {
     try {

@@ -2,7 +2,7 @@
 // Dependencies
 import jwt from '../utilities/jwt-promise.mjs';
 
-exports.wsAuthMiddleware = async function wsAuthMiddleware(info, cb) {
+export async function wsAuthMiddleware(info, cb) {
   const { token } = info.req.headers;
 
   if (!token) {
@@ -18,7 +18,7 @@ exports.wsAuthMiddleware = async function wsAuthMiddleware(info, cb) {
       cb(false, 401, 'Unauthorized');
     }
   }
-};
+}
 
 export default async function authMiddleware(req, res, next) {
   const csrfTokenHeader = req.get('x-csrf-token');
